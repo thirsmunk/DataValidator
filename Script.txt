@@ -1,0 +1,23 @@
+function onOpen() {
+  var ss = SpreadsheetApp.getActive();
+  var items = [{name: 'Add range validation to Races', functionName: 'addRangeValidation'}];
+  ss.addMenu('DataValidation', items);
+}
+
+function addRangeValidation() {
+  
+  for(var i = 31; i < 201; i++) {
+  var cellColumn_main = 'F';
+  var cellTarget = SpreadsheetApp.getActive().getRange(cellColumn_main + i);
+  
+  for(var j = 31; j < 201; j++) {
+  var parser_sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Parser');
+  var cellColumn_parser_1 = 'K';
+  var cellColumn_parser_2 = 'M';
+  var range = parser_sheet.getRange(cellColumn_parser_1 + j + ':' + cellColumn_parser_2 + j);
+  }
+  
+  var rule = SpreadsheetApp.newDataValidation().requireValueInRange(range).build();
+  cellTarget.setDataValidation(rule);
+}
+}
